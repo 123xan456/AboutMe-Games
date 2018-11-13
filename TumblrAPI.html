@@ -46,19 +46,18 @@
 <script>
     let tagscontent = document.getElementById('tagscontent')
 	const tags = document.getElementById('tagscontent')
-//tags
+
 let tag1 = ['sushi', 'Tokyo', 'mountain', 'fortnite', 'books', 'hats']
 let tag2 = ['coffee', 'Kuala Lumpur', 'pubg', 'cake', 'marvel', 'dance']
 let tag3 = ['chocolate', 'NewYork', 'hotel', 'cartoon', 'comics', 'celebrity']
 let tag4 = ['noodles', 'San Francisco', 'restaurant', 'pizza', 'phones', 'clothing']
 
-// randomly select one tag from each arrays
 let word1 = tag1[Math.floor(Math.random()*tag1.length)]
 let word2 = tag2[Math.floor(Math.random()*tag2.length)]
 let word3 = tag3[Math.floor(Math.random()*tag3.length)]
 let word4 = tag4[Math.floor(Math.random()*tag4.length)]
 
-// show the array of tags
+
 let a = document.getElementById('a')
 a.innerHTML = word1
 let b = document.getElementById('b')
@@ -92,11 +91,6 @@ fetch ('https://api.tumblr.com/v2/tagged?tag=' + word + '&api_key=yILfKc3wswUjMu
 			}
 		}
 	})
-
-
-
-
-// alert showing results when a tag is clicked (onclick + alert)
 a.onclick = function(event){
 	event.preventDefault();
 	if(a.innerHTML == word){
@@ -139,6 +133,4 @@ d.onclick = function(event){
 }
 </script>
 </body>
-
-
 </html>
