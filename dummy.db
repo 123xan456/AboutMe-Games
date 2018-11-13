@@ -1,0 +1,124 @@
+Microsoft Windows [Version 10.0.17134.345]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\LXA03>sqlite3
+SQLite version 3.24.0 2018-06-04 19:24:41
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> CREATE TABLE users (
+   ...>   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   ...>   first_name VARCHAR(64) NOT NULL,
+   ...>   last_name VARCHAR(64) NOT NULL,
+   ...>   email VARCHAR(128) UNIQUE NOT NULL,
+   ...>   created_at DATETIME NOT NULL,
+   ...>   updated_at DATETIME NOT NULL
+   ...> );
+sqlite> INSERT INTO users
+   ...> (first_name, last_name, email, created_at, updated_at)
+   ...> VALUES
+   ...> ('Joshua', 'Teng', 'jedicoder@example.com', DATETIME('now'), DATETIME('now'));
+sqlite> INSERT INTO users
+   ...> (first_name, last_name, email, created_at, updated_at)
+   ...> VALUES
+   ...> ('Joshua', 'Teng', 'jedicoder@example.com', DATETIME('now'), DATETIME('now'));
+Error: UNIQUE constraint failed: users.email
+sqlite> INSERT INTO users
+   ...> (first_name, last_name, email, created_at, updated_at)
+   ...> VALUES
+   ...> ('Joshua', 'Teng', 'hello@example.com', DATETIME('now'), DATETIME('now'));
+sqlite> SELECT * FROM users;
+1|Joshua|Teng|jedicoder@example.com|2018-11-13 08:03:43|2018-11-13 08:03:43
+2|Joshua|Teng|hello@example.com|2018-11-13 08:04:20|2018-11-13 08:04:20
+sqlite> INSERT INTO USERS
+   ...> (first_name, last_name, email, created_at, updated_at)
+   ...> VALUES
+   ...> ('Xiaan','Loh','reeeeeeeeeeeeeeeee@gmail.com',DATETIME('now'),DATETIME('now'));
+sqlite> SELECT * FROM users
+   ...> ;
+1|Joshua|Teng|jedicoder@example.com|2018-11-13 08:03:43|2018-11-13 08:03:43
+2|Joshua|Teng|hello@example.com|2018-11-13 08:04:20|2018-11-13 08:04:20
+3|Xiaan|Loh|reeeeeeeeeeeeeeeee@gmail.com|2018-11-13 08:05:48|2018-11-13 08:05:48
+sqlite> ALTER users
+   ...> ADD nickname VARCHAR(64) NOT NULL
+   ...> ;
+Error: near "users": syntax error
+sqlite> ALTER users
+   ...> ADD nicknamesn VARCHAR(64 NOT NULL;)
+   ...> ;
+Error: near "users": syntax error
+sqlite> ALTER users
+   ...> ADD nicknames VARCHAR(64) NOT NULL ;
+Error: near "users": syntax error
+sqlite> ALTER TABLES users
+   ...> ADD nicknames VARCHAR(64) NOT NULL;
+Error: near "TABLES": syntax error
+sqlite> ALTER TABLE users
+   ...> ADD nicknames VARCHAR(64) NOT NULL;
+Error: Cannot add a NOT NULL column with default value NULL
+sqlite> ALTER TABLE users
+   ...> ADD nicknames VARCHAR(64);
+sqlite> .schema
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  first_name VARCHAR(64) NOT NULL,
+  last_name VARCHAR(64) NOT NULL,
+  email VARCHAR(128) UNIQUE NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME NOT NULL
+, nicknames VARCHAR(64));
+CREATE TABLE sqlite_sequence(name,seq);
+sqlite> UPDATE users
+   ...> SET nickname = 'pookie butt'
+   ...> WHERE first_name = 'Josh';
+Error: no such column: nickname
+sqlite> UPDATE users
+   ...> SET nicknames = 'pookie butt'
+   ...> WHERE first_name = 'Joshua'
+   ...> ;
+sqlite> SELECT * FROM users
+   ...> ;
+1|Joshua|Teng|jedicoder@example.com|2018-11-13 08:03:43|2018-11-13 08:03:43|pookie butt
+2|Joshua|Teng|hello@example.com|2018-11-13 08:04:20|2018-11-13 08:04:20|pookie butt
+3|Xiaan|Loh|reeeeeeeeeeeeeeeee@gmail.com|2018-11-13 08:05:48|2018-11-13 08:05:48|
+sqlite> UPDATE users
+   ...> SET nicknames = 'pookie butt'
+   ...> SET nicknames = 'reeeeeee'
+   ...> WHERE first_name = 'Xiaan';
+Error: near "SET": syntax error
+sqlite> UPDATE users
+   ...> SET nicknames = 'reeeeeee'
+   ...> WHERE first_name = 'Xiaan';
+sqlite> SELECT * FROM users
+   ...> ;
+1|Joshua|Teng|jedicoder@example.com|2018-11-13 08:03:43|2018-11-13 08:03:43|pookie butt
+2|Joshua|Teng|hello@example.com|2018-11-13 08:04:20|2018-11-13 08:04:20|pookie butt
+3|Xiaan|Loh|reeeeeeeeeeeeeeeee@gmail.com|2018-11-13 08:05:48|2018-11-13 08:05:48|reeeeeee
+sqlite> .tables
+users
+sqlite> UPDATE users
+   ...> SET nicknames = 'Ninja coder'
+   ...> WHERE first_name = 'Joshua';
+sqlite> SELECT * FROM users
+   ...> ;
+1|Joshua|Teng|jedicoder@example.com|2018-11-13 08:03:43|2018-11-13 08:03:43|Ninja coder
+2|Joshua|Teng|hello@example.com|2018-11-13 08:04:20|2018-11-13 08:04:20|Ninja coder
+3|Xiaan|Loh|reeeeeeeeeeeeeeeee@gmail.com|2018-11-13 08:05:48|2018-11-13 08:05:48|reeeeeee
+sqlite> UPDATE users
+   ...> SET first_name = 'Josh'
+   ...> WHERE last_name = 'Teng'
+   ...> ;
+sqlite> SELECT * FROM users
+   ...> ;
+1|Josh|Teng|jedicoder@example.com|2018-11-13 08:03:43|2018-11-13 08:03:43|Ninja coder
+2|Josh|Teng|hello@example.com|2018-11-13 08:04:20|2018-11-13 08:04:20|Ninja coder
+3|Xiaan|Loh|reeeeeeeeeeeeeeeee@gmail.com|2018-11-13 08:05:48|2018-11-13 08:05:48|reeeeeee
+sqlite> UPDATE users
+   ...> SET updated_at = DATETIME('now')
+   ...> WHERE first_name IN ('Josh','Xiaan');
+sqlite> SELECT * FROM users
+   ...> ;
+1|Josh|Teng|jedicoder@example.com|2018-11-13 08:03:43|2018-11-13 10:18:53|Ninja coder
+2|Josh|Teng|hello@example.com|2018-11-13 08:04:20|2018-11-13 10:18:53|Ninja coder
+3|Xiaan|Loh|reeeeeeeeeeeeeeeee@gmail.com|2018-11-13 08:05:48|2018-11-13 10:18:53|reeeeeee
+sqlite>
